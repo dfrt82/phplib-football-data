@@ -27,7 +27,7 @@
                 <th colspan="3">Result</th>
                 </tr>
                 <?php foreach ($soccerseason->getFixturesByMatchday(1) as $fixture) { ?>            
-                <tr> <? //var_dump($fixture); ?>
+                <tr> 
                     <td><? echo $fixture->homeTeamName; ?></td>
                     <td>-</td>
                     <td><? echo $fixture->awayTeamName; ?></td>
@@ -41,11 +41,11 @@
             echo "<p><hr><p>";            
             // fetch all available upcoming fixtures for the next week and display
             $now = new DateTime();            
-            $end = $now->add(new DateInterval('P27D'));                        
+            $end = new DateTime(); $end->add(new DateInterval('P7D'));                        
             $response = $api->getFixturesForDateRange($now->format('Y-m-d'), $end->format('Y-m-d'));
         ?>
             <table>
-                <caption style="text-align:left">Upcoming fixtures in the next week:</caption>
+                <caption style="text-align:left">Upcoming fixtures the next 7 days:</caption>
                 <tr>
                     <th>HomeTeam</th>
                     <th></th>
@@ -97,7 +97,7 @@
         <?      
             echo "<p><hr><p>";            
             // fetch players for a specific team            
-            $team = $api->getTeamById(17);
+            $team = $api->getTeamById($searchQuery->teams[0]->id);
         ?>
         <table>
             <caption style="text-align:left">Players of <? echo $team->_payload->name; ?>:</caption>

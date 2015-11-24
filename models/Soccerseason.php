@@ -45,7 +45,7 @@ class Soccerseason {
      * @return array of fixture objects
      */    
     public function getFixturesByMatchday($matchday = 1) {        
-        $uri = $this->payload->_links->fixtures->href;
+        $uri = $this->payload->_links->fixtures->href . '/?matchday=' . $matchday;
         
         $response = file_get_contents($uri, false, stream_context_create($this->reqPrefs)); 
         $response = json_decode($response);

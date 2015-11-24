@@ -33,7 +33,7 @@ class Team {
      * @return array of stdObjects representing fixtures
      */    
     public function getFixtures($venue = "") {        
-        $uri = $this->_payload->_links->fixtures->href;
+        $uri = $this->_payload->_links->fixtures->href . '/?venue=' . $venue;
         $response = file_get_contents($uri, false, stream_context_create($this->reqPrefs)); 
         
         return json_decode($response);
@@ -45,7 +45,7 @@ class Team {
      * @return array of fixture objects
      */    
     public function getPlayers() {        
-        $uri = $this->_payload->_links->fixtures->href;
+        $uri = $this->_payload->_links->players->href;
         
         $response = file_get_contents($uri, false, stream_context_create($this->reqPrefs)); 
         $response = json_decode($response);
