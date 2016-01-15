@@ -100,7 +100,7 @@
                 // fetch players for a specific team
                 $team = $api->getTeamById($searchQuery->teams[0]->id);
             ?>
-            <h3>Players of <php echo $team->_payload->name; ?></h3>
+            <h3>Players of <?php echo $team->_payload->name; ?></h3>
             <table class="table table-striped">
                 <tr>
                     <th>Name</th>
