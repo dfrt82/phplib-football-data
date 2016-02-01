@@ -63,7 +63,7 @@ class Soccerseason {
         $response = file_get_contents($uri, false, stream_context_create($this->reqPrefs)); 
         $response = json_decode($response);
         
-        return json_decode($response->teams);
+        return $response->teams;
     }
     
     /**
