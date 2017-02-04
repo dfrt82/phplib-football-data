@@ -1,6 +1,5 @@
 <?php
 
-include 'config.php';
 include './models/Soccerseason.php';
 include './models/Team.php';
 
