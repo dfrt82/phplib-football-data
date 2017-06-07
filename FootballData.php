@@ -68,7 +68,7 @@ class FootballData {
         return $this->endRes("fixtures?timeFrame=$date");
     }
 
-    public function headToHead(int $fixtureID, int $count) {
+    public function headToHead(int $fixtureID, int $count=10) {
         return $this->endRes("fixtures/$fixtureID?head2head=$count");
     }
     
