@@ -1,13 +1,10 @@
 <?php
 
-include './models/Soccerseason.php';
-include './models/Team.php';
-
 /**
  * This service class encapsulates football-data.org's RESTful API.
  *
  * @author Daniel Freitag <daniel@football-data.org>
- * @date 04.11.2015
+ * @date 04.11.2015 | switched to v2 09.08.2018
  * 
  */
 class FootballData {
@@ -31,30 +28,13 @@ class FootballData {
     }
     
     /**
-     * Function returns a specific soccer season identified by an id.
+     * Function returns a particular competition identified by an id.
      * 
      * @param Integer $id
-     * @return \Soccerseason object
+     * @return array
      */        
-    public function getSoccerseasonById($id) {
-        $resource = 'soccerseasons/' . $id;
-        $response = file_get_contents($this->baseUri . $resource, false, 
-                                      stream_context_create($this->reqPrefs));
-        $result = json_decode($response);
-        
-        return new Soccerseason($result);
-    }
-    
-    /**
-     * Function returns all available fixtures for a given date range.
-     * 
-     * @param DateString 'Y-m-d' $start
-     * @param DateString 'Y-m-d' $end
-     * @return array of fixture objects
-     */    
-    public function getFixturesForDateRange($start, $end) {
-        $resource = 'fixtures/?timeFrameStart=' . $start . '&timeFrameEnd=' . $end;
-
+    public function findCompetitionById($id) {
+        $resource = 'competitions/' . $id;
         $response = file_get_contents($this->baseUri . $resource, false, 
                                       stream_context_create($this->reqPrefs));
         
@@ -62,13 +42,49 @@ class FootballData {
     }
     
     /**
-     * Function returns one unique fixture identified by a given id.
+     * Function returns all available matches for a given date range.
+     * 
+     * @param DateString 'Y-m-d' $start
+     * @param DateString 'Y-m-d' $end
+     * 
+     * @return array of matches
+     */    
+    public function findMatchesForDateRange($start, $end) {
+        $resource = 'matches/?dateFrom=' . $start . '&dateTo=' . $end;
+
+        $response = file_get_contents($this->baseUri . $resource, false, 
+                                      stream_context_create($this->reqPrefs));
+        
+        return json_decode($response);
+    }
+    
+    public function findMatchesByCompetitionAndMatchday($c, $m) {
+        $resource = 'competitions/' . $c . '/matches/?matchday=' . $m;
+
+        $response = file_get_contents($this->baseUri . $resource, false, 
+                                      stream_context_create($this->reqPrefs));
+        
+        return json_decode($response);
+    }
+    
+    public function findHomeMatchesByTeam($teamId) {
+        $resource = 'teams/' . $teamId . '/matches/?venue=home';
+        //http://api.football-data.org/v2/teams/62/matches?venue=home
+
+        $response = file_get_contents($this->baseUri . $resource, false, 
+                                      stream_context_create($this->reqPrefs));
+        
+        return json_decode($response)->matches;
+    }
+    
+    /**
+     * Function returns one unique match identified by a given id.
      * 
      * @param int $id
      * @return stdObject fixture
      */
-    public function getFixtureById($id) {
-        $resource = 'fixtures/' . $id;
+    public function findMatchById($id) {
+        $resource = 'matches/' . $id;
         $response = file_get_contents($this->baseUri . $resource, false, 
                                       stream_context_create($this->reqPrefs));
         
@@ -81,14 +97,12 @@ class FootballData {
      * @param int $id
      * @return stdObject team
      */    
-    public function getTeamById($id) {
+    public function findTeamById($id) {
         $resource = 'teams/' . $id;
         $response = file_get_contents($this->baseUri . $resource, false, 
                                       stream_context_create($this->reqPrefs));
         
-        $result = json_decode($response);
-        
-        return new Team($result);
+        return json_decode($response);
     }
     
     /**
