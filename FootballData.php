@@ -66,9 +66,18 @@ class FootballData {
         
         return json_decode($response);
     }
+
+    public function findStandingsByCompetition($id) {
+	$resource = 'competitions/' . $id . '/standings';
+        $response = file_get_contents($this->baseUri . $resource, false, 
+                                      stream_context_create($this->reqPrefs));
+
+        return json_decode($response);
+    }
+
     
     public function findHomeMatchesByTeam($teamId) {
-        $resource = 'teams/' . $teamId . '/matches/?venue=home';
+        $resource = 'teams/' . $teamId . '/matches/?venue=HOME';
         //http://api.football-data.org/v2/teams/62/matches?venue=home
 
         $response = file_get_contents($this->baseUri . $resource, false, 
@@ -118,4 +127,6 @@ class FootballData {
         
         return json_decode($response);
     }    
+
+
 }
