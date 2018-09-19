@@ -36,6 +36,29 @@
                     </tr>
                     <?php } ?>
                 </table>
+                <h3>Current standing of the Premiere League</h3>
+                <table class="table table-striped">
+                    <tr>
+                    <th>Position</th>
+                    <th>TeamName</th>
+                    <th>GoalDifference</th>
+                    <th>Points</th>
+                    </tr>
+                    <?php foreach ($api->findStandingsByCompetition(2021)->standings as $standing) { 
+                          if ($standing->type == 'TOTAL') { 
+                              foreach ($standing->table as $standingRow) {
+                    ?>
+                    <tr>
+                      <td><?php echo $standingRow->position; ?></td>
+                      <td><?php echo $standingRow->team->name; ?></td>
+                      <td><?php echo $standingRow->goalDifference; ?></td>
+                      <td><?php echo $standingRow->points; ?></td>
+                    </tr>
+                    <?php }}} ?>
+                    <tr>
+                    </tr>
+                </table>
+
             <?php
                 echo "<p><hr><p>";
                 // fetch all available upcoming matches for the next 3 days
@@ -97,12 +120,14 @@
                 <tr>
                     <th>Name</th>
                     <th>Position</th>                    
+	            <th>Shirtnumber</th>
                     <th>Date of birth</th>
                 </tr>
                 <?php foreach ($team->squad as $player) { ?>
                 <tr>
                     <td><?php echo $player->name; ?></td>
                     <td><?php echo $player->position; ?></td>                    
+                    <td><?php echo $player->shirtNumber; ?></td>
                     <td><?php echo $player->dateOfBirth; ?></td>
                 </tr>
                 <?php } ?>
