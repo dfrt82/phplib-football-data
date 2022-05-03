@@ -18,9 +18,9 @@ services:
       - football-data
     ports:
       - '9988:80'
-      - '443:443'
     volumes:
       - ./nginx.conf:/opt/bitnami/nginx/conf/server_blocks/showcase.conf
+      - ./css:/app/css
  
 networks:
   football-data:
