@@ -37,9 +37,9 @@
                         <td><?php echo $match->homeTeam->name; ?></td>
                         <td>-</td>
                         <td><?php echo $match->awayTeam->name; ?></td>
-                        <td><?php echo $match->score->fullTime->homeTeam;  ?></td>
+                        <td><?php echo $match->score->fullTime->home;  ?></td>
                         <td>:</td>
-                        <td><?php echo $match->score->fullTime->awayTeam;  ?></td>
+                        <td><?php echo $match->score->fullTime->away;  ?></td>
                     </tr>
                     <?php } ?>
                 </table>
@@ -113,7 +113,7 @@
 
         <section class="section">
             <h4 class="title is-4">
-                This seasons' home matches of Everton FC
+                This seasons' home matches of Newcastle United
             </h4>
             <table class="table table-striped">
                 <tr>

@@ -4,7 +4,7 @@
  * This service class encapsulates football-data.org's RESTful API.
  *
  * @author Daniel Freitag <daniel@football-data.org>
- * @date 04.11.2015 | switched to v2 09.08.2018
+ * @date 04.11.2015 | switched to v2 09.08.2018 | migrated to v4 03.05.2022
  * 
  */
 class FootballData {
@@ -68,7 +68,7 @@ class FootballData {
     }
 
     public function findStandingsByCompetition($id) {
-	$resource = 'competitions/' . $id . '/standings';
+	    $resource = 'competitions/' . $id . '/standings';
         $response = file_get_contents($this->baseUri . $resource, false, 
                                       stream_context_create($this->reqPrefs));
 
@@ -78,8 +78,6 @@ class FootballData {
     
     public function findHomeMatchesByTeam($teamId) {
         $resource = 'teams/' . $teamId . '/matches/?venue=HOME';
-        //http://api.football-data.org/v2/teams/62/matches?venue=home
-
         $response = file_get_contents($this->baseUri . $resource, false, 
                                       stream_context_create($this->reqPrefs));
         
