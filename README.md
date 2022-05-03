@@ -9,7 +9,11 @@ In case you have docker setup on your system, you can make use of it by just exe
 docker-compose up -d
 ````
 
-and then opening up localhost:9988 in your browser.
+and then opening up localhost:9988 in your browser to see something like shown below.
 
 Best,
 daniel
+
+![Screenshot 01](/screens/screen01.png?raw=true "Screenshot 01")
+![Screenshot 02](/screens/screen02.png?raw=true "Screenshot 02")
+![Screenshot 03](/screens/screen03.png?raw=true "Screenshot 03")
